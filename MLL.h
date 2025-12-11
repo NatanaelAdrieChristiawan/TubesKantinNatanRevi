@@ -23,6 +23,7 @@ struct infotypeKantin {
 struct infotypeMenu {
     string namaMenu;
     int stok;
+    string kategori;
 };
 
 // 3. Definisi Element
