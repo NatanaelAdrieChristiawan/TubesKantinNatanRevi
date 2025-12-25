@@ -3,16 +3,86 @@
 
 using namespace std;
 
+
 int main()
 {
     List DataKantin;
     createList(DataKantin);
 
-    int pilihan;
+    int pilihan = -1;   // inisialisasi awal
     string namaK, namaM, kat;
     int stok;
 
-    do {
+    // tampilkan menu pertama kali
+    cout << "\n=== SISTEM MONITORING KANTIN ===" << endl;
+    cout << "1. Tambah Kantin Baru" << endl;
+    cout << "2. Tambah Menu ke Kantin" << endl;
+    cout << "3. Lihat Semua Data" << endl;
+    cout << "4. Hapus Menu" << endl;
+    cout << "5. Hapus Kantin (Tutup Permanen)" << endl;
+    cout << "6. Analisis Performa (Min/Max)" << endl;
+    cout << "7. Lihat Menu di Kantin Tertentu" << endl;
+    cout << "0. Keluar" << endl;
+    cout << "Pilih: ";
+    cin >> pilihan;
+    cin.ignore();
+
+    while (pilihan != 0) {
+
+        if (pilihan == 1) {
+            cout << "Nama Kantin: ";
+            getline(cin, namaK);
+            insertKantin(DataKantin, newKantin(namaK));
+        }
+        else if (pilihan == 2) {
+            cout << "Masukan ke Kantin mana: ";
+            getline(cin, namaK);
+
+            if (searchKantin(DataKantin, namaK) == NULL) {
+                cout << "Kantin gak ditemukan!" << endl;
+            } else {
+                cout << "Nama Menu: ";
+                getline(cin, namaM);
+                cout << "Stok: ";
+                cin >> stok;
+                cin.ignore();
+                cout << "Kategori (Berat/Snack/Minum): ";
+                getline(cin, kat);
+
+                insertMenu(DataKantin, namaK, newMenu(namaM, stok, kat));
+            }
+        }
+        else if (pilihan == 3) {
+            showAll(DataKantin);
+        }
+        else if (pilihan == 4) {
+            cout << "Hapus dari Kantin mana: ";
+            getline(cin, namaK);
+            cout << "Nama Menu yg dihapus: ";
+            getline(cin, namaM);
+
+            deleteMenu(DataKantin, namaK, namaM);
+        }
+        else if (pilihan == 5) {
+            cout << "Nama Kantin yg mau digusur: ";
+            getline(cin, namaK);
+
+            deleteKantin(DataKantin, namaK);
+        }
+        else if (pilihan == 6) {
+            showMinMax(DataKantin);
+        }
+        else if (pilihan == 7) {
+            cout << "Nama Kantin: ";
+            getline(cin, namaK);
+            adrKantin K = searchKantin(DataKantin, namaK);
+            showMenuDiKantin(K);
+        }
+        else {
+            cout << "Pilihan salah." << endl;
+        }
+
+        // tampilkan menu lagi
         cout << "\n=== SISTEM MONITORING KANTIN ===" << endl;
         cout << "1. Tambah Kantin Baru" << endl;
         cout << "2. Tambah Menu ke Kantin" << endl;
@@ -20,53 +90,13 @@ int main()
         cout << "4. Hapus Menu" << endl;
         cout << "5. Hapus Kantin (Tutup Permanen)" << endl;
         cout << "6. Analisis Performa (Min/Max)" << endl;
+        cout << "7. Lihat Menu di Kantin Tertentu" << endl;
         cout << "0. Keluar" << endl;
         cout << "Pilih: ";
         cin >> pilihan;
-        cin.ignore(); // Bersihin buffer enter biar getline gak error
+        cin.ignore();
+    }
 
-        switch(pilihan) {
-        case 1:
-            cout << "Nama Kantin: ";
-            getline(cin, namaK);
-            insertKantin(DataKantin, newKantin(namaK));
-            break;
-        case 2:
-            cout << "Masukan ke Kantin mana: ";
-            getline(cin, namaK);
-            // Cek dulu kantinnya ada gak, biar user gak capek ngetik menu kalo kantinnya gada
-            if (searchKantin(DataKantin, namaK) == NULL) {
-                cout << "Kantin gak ditemukan!" << endl;
-            } else {
-                cout << "Nama Menu: "; getline(cin, namaM);
-                cout << "Stok: "; cin >> stok;
-                cin.ignore();
-                cout << "Kategori (Berat/Snack/Minum): "; getline(cin, kat);
-                insertMenu(DataKantin, namaK, newMenu(namaM, stok, kat));
-            }
-            break;
-        case 3:
-            showAll(DataKantin);
-            break;
-        case 4:
-            cout << "Hapus dari Kantin mana: "; getline(cin, namaK);
-            cout << "Nama Menu yg dihapus: "; getline(cin, namaM);
-            deleteMenu(DataKantin, namaK, namaM);
-            break;
-        case 5:
-            cout << "Nama Kantin yg mau digusur: "; getline(cin, namaK);
-            deleteKantin(DataKantin, namaK);
-            break;
-        case 6:
-            showMinMax(DataKantin);
-            break;
-        case 0:
-            cout << "Dadah..." << endl;
-            break;
-        default:
-            cout << "Pilihan salah." << endl;
-        }
-    } while (pilihan != 0);
-
+    cout << "Dadah..." << endl;
     return 0;
 }
