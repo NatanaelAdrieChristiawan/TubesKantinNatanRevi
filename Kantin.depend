@@ -1,0 +1,14 @@
+# depslib dependency file v1.0
+1766671723 source:c:\revi kuliah\semester 3\struktur data\tubes\kentutlah\kantin\mll.h
+	<iostream>
+
+1766671901 source:c:\revi kuliah\semester 3\struktur data\tubes\kentutlah\kantin\main.cpp
+	<iostream>
+	"MLL.h"
+
+1766671919 c:\revi kuliah\semester 3\struktur data\tubes\kentutlah\kantin\mll.h
+	<iostream>
+
+1766677916 source:c:\revi kuliah\semester 3\struktur data\tubes\kentutlah\kantin\mll.cpp
+	"MLL.h"
+
